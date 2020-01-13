@@ -43,31 +43,34 @@ const resetBoard = () => {
 
 // Check board to see if someone has won
 const checkBoard = (box) => {
-  if (boardCapacity === 9) {
-    console.log('Game finished');
-    resetBoard();
-  }
   var conditions = boardChecks[box.id];
 
   // Check the conditions based on box
   for (var i = 0; i < conditions.length; i++) {
     var conditionCheck = conditions[i];
-    var fC = conditionCheck[0];
-    var sC = conditionCheck[1];
-    var oC = box.innerHTML;
+    var fC = conditionCheck[0]; // first condition check
+    var sC = conditionCheck[1]; // second condition check
+    var oC = box.innerHTML;     // box text that was marked
     var currentPlayer = check ? 'Player 2': 'Player 1';
+    // If current play action matches with each given condition
     if (rowCol[fC].innerHTML === oC && rowCol[sC].innerHTML === oC) {
       console.log(`${currentPlayer} wins!`);
       alert(`${currentPlayer} wins!`);
-      resetBoard();
+      // Reset board after game ends
+      setTimeout(resetBoard, 1000);
       return;
     }
+  }
+
+  // No one wins, reset board
+  if (boardCapacity === 9) {
+    alert("Game finished! It's a tie");
+    setTimeout(resetBoard, 1000);
   }
 }
 
 // Mark board where box is clicked
 const markBoard = (item) => { 
-  console.log(item);
   // Don't allow box to change once set
   if (item.innerHTML === 'X' || item.innerHTML === 'O') {
     alert('Box occupied!');
@@ -78,20 +81,18 @@ const markBoard = (item) => {
   var mark = check ? 'X' : 'O';
   item.innerHTML = mark;
   boardCapacity++;
+  console.log(boardCapacity);
 
   // Change to next player
   check = !check;
   player = check ? 'Player 1': 'Player 2';
 
   // Check if a player has won or not
-  // alert(`${player} turn now!`);
   checkBoard(item);
-  console.log(check);
 }
 
 // Add event listener to each box
 for (var i = 0; i < rowCol.length; i++) {
-  var test = rowCol[i];
   rowCol[i].addEventListener("click", (e) => { 
     markBoard(e.target); 
   });
