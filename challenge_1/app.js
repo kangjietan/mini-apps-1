@@ -15,9 +15,20 @@
 */
 
 var rowCol = document.getElementsByTagName('td');
+var player1 = document.getElementsByClassName('p1');
+var player2 = document.getElementsByClassName('p2');
 var check = true;
 var boardCapacity = 0;
+
+// First player is 1. After first move -> 2. 
+// Changes after each move
 var player = check ? 'Player 1': 'Player 2';
+
+// Track the number of wins each player has
+var wins = {
+  'Player 1': 0,
+  'Player 2': 0
+}
 
 // Board checks at each box
 const boardChecks = {
@@ -31,6 +42,8 @@ const boardChecks = {
   '7': [[1, 4], [6, 8]],
   '8': [[0, 4], [2, 5], [6, 7]]
 }
+
+////////////// CONTROLLER //////////////////////
 
 // Clear board
 const resetBoard = () => {
@@ -51,9 +64,13 @@ const checkBoard = (box) => {
     var fC = conditionCheck[0]; // first condition check
     var sC = conditionCheck[1]; // second condition check
     var oC = box.innerHTML;     // box text that was marked
+
+    // Current player before it was changed in markBoard
     var currentPlayer = check ? 'Player 2': 'Player 1';
+
     // If current play action matches with each given condition
     if (rowCol[fC].innerHTML === oC && rowCol[sC].innerHTML === oC) {
+      wins[currentPlayer]++;
       console.log(`${currentPlayer} wins!`);
       alert(`${currentPlayer} wins!`);
       // Reset board after game ends
@@ -70,30 +87,22 @@ const checkBoard = (box) => {
 }
 
 // Mark board where box is clicked
-const markBoard = (item) => { 
+const markBoard = (box) => { 
   // Don't allow box to change once set
-  if (item.innerHTML === 'X' || item.innerHTML === 'O') {
+  if (box.innerHTML === 'X' || box.innerHTML === 'O') {
     alert('Box occupied!');
     return;
   }
 
   // Set box to X or O based on player
   var mark = check ? 'X' : 'O';
-  item.innerHTML = mark;
+  box.innerHTML = mark;
   boardCapacity++;
-  console.log(boardCapacity);
 
   // Change to next player
   check = !check;
   player = check ? 'Player 1': 'Player 2';
 
   // Check if a player has won or not
-  checkBoard(item);
-}
-
-// Add event listener to each box
-for (var i = 0; i < rowCol.length; i++) {
-  rowCol[i].addEventListener("click", (e) => { 
-    markBoard(e.target); 
-  });
+  checkBoard(box);
 }
