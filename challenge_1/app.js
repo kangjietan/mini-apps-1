@@ -19,8 +19,9 @@
 var rowCol = document.getElementsByTagName('td');
 var player1 = document.getElementsByClassName('p1')[0];
 var player2 = document.getElementsByClassName('p2')[0];
-player1.innerHTML = player1.innerHTML + '0 wins';
-player2.innerHTML = player2.innerHTML + '0 wins';
+var playerc = document.getElementsByClassName('cp')[0];
+player1.innerHTML = '[X] ' + player1.innerHTML + '0 wins';
+player2.innerHTML = '[O] ' + player2.innerHTML + '0 wins';
 var check = true;
 var boardCapacity = 0;
 

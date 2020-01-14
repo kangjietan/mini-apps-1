@@ -1,4 +1,19 @@
 ////////////// CONTROLLER //////////////////////
+/*
+0 1 2
+3 4 5
+6 7 8
+
+0: Check 1, 2 -> 4, 8 -> 3, 6
+1: Check 0, 2 -> 4, 7
+2: Check 0, 1 -> 4, 6 -> 5, 8
+3: Check 0, 6 -> 4, 5
+4: Check 0, 8 -> 1, 7 -> 2, 6 -> 3, 5
+5: Check 3, 4 -> 2, 8
+6: Check 0, 3 -> 2, 4 -> 7, 8
+7: Check 1, 4 -> 6, 8
+8: Check 0, 4 -> 2, 5 -> 6, 7 
+*/
 
 // Clear board
 const resetBoard = () => {
@@ -6,6 +21,13 @@ const resetBoard = () => {
     rowCol[i].innerHTML = "";
   }
   check = true;
+  boardCapacity = 0;
+}
+
+const clearBoard = () => {
+  for (var i = 0; i < rowCol.length; i++) {
+    rowCol[i].innerHTML = "";
+  }
   boardCapacity = 0;
 }
 
@@ -29,16 +51,21 @@ const checkBoard = (box) => {
       // Display wins of each player
       wins[currentPlayer]++;
       if (currentPlayer === 'Player 1') {
-        player1.innerHTML = 'Player 1: ' + wins[currentPlayer] + (wins[currentPlayer] > 1 ? ' wins' : ' win');
+        player1.innerHTML = '[X] Player 1: ' + wins[currentPlayer] + (wins[currentPlayer] > 1 ? ' wins' : ' win');
       } else {
-        player2.innerHTML = 'Player 2: ' + wins[currentPlayer] + (wins[currentPlayer] > 1 ? ' wins' : ' win');
+        player2.innerHTML = '[O] Player 2: ' + wins[currentPlayer] + (wins[currentPlayer] > 1 ? ' wins' : ' win');
       }
 
       // Notify winner
       alert(`${currentPlayer} wins!`);
+
+      // Current player who wins goes first
+      playerc.innerHTML = currentPlayer + ' goes first';
+
+      check = currentPlayer === 'Player 1';
       
       // Reset board after game ends
-      setTimeout(resetBoard, 1000);
+      setTimeout(clearBoard, 1000);
       return;
     }
   }
@@ -46,7 +73,7 @@ const checkBoard = (box) => {
   // No one wins, reset board
   if (boardCapacity === 9) {
     alert("Game finished! It's a tie");
-    setTimeout(resetBoard, 1000);
+    setTimeout(clearBoard, 1000);
   }
 }
 
