@@ -1,7 +1,11 @@
 var $form = $('form');
-var input = $form[0].elements[0].value;
+// var input = $form[0].elements[0].value;
+// console.log(input);
 
-const onSubmitHandler = () => {
-  url: 'http://localhost:300/submit'
+const onSubmitHandler = (event) => {
+  event.preventDefault();
+  var input = $form[0].elements[0].value;
+  $.post("http://localhost:3000/submit", {input});
 }
-console.log($form);
+
+$form.on('submit', onSubmitHandler);
