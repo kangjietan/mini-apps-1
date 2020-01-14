@@ -14,9 +14,13 @@
 8: Check 0, 4 -> 2, 5 -> 6, 7 
 */
 
+////////////// MODEL //////////////////////
+
 var rowCol = document.getElementsByTagName('td');
-var player1 = document.getElementsByClassName('p1');
-var player2 = document.getElementsByClassName('p2');
+var player1 = document.getElementsByClassName('p1')[0];
+var player2 = document.getElementsByClassName('p2')[0];
+player1.innerHTML = player1.innerHTML + '0 wins';
+player2.innerHTML = player2.innerHTML + '0 wins';
 var check = true;
 var boardCapacity = 0;
 
@@ -70,9 +74,18 @@ const checkBoard = (box) => {
 
     // If current play action matches with each given condition
     if (rowCol[fC].innerHTML === oC && rowCol[sC].innerHTML === oC) {
+
+      // Display wins of each player
       wins[currentPlayer]++;
-      console.log(`${currentPlayer} wins!`);
+      if (currentPlayer === 'Player 1') {
+        player1.innerHTML = 'Player 1: ' + wins[currentPlayer] + (wins[currentPlayer] > 1 ? ' wins' : ' win');
+      } else {
+        player2.innerHTML = 'Player 2: ' + wins[currentPlayer] + (wins[currentPlayer] > 1 ? ' wins' : ' win');
+      }
+
+      // Notify winner
       alert(`${currentPlayer} wins!`);
+      
       // Reset board after game ends
       setTimeout(resetBoard, 1000);
       return;
