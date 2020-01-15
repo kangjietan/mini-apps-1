@@ -16,28 +16,35 @@ class App extends React.Component {
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.addFormInfo1 = this.addFormInfo1.bind(this);
+    this.addFormInfo2 = this.addFormInfo2.bind(this);
+    this.addFormInfo3 = this.addFormInfo3.bind(this);
   }
 
+  // Cycle through pages after each click
   handleButtonClick() {
     this.setState({page: this.state.page + 1});
   }
 
+  // Add object of information
   addFormInfo1(info) {
-    this.state.f1information.push(info);
+    this.state.f1information = info;
   }
 
   addFormInfo2(info) {
-    this.state.f2information.push(info);
+    this.state.f2information = info;
   }
 
   addFormInfo3(info) {
-    this.state.f3information.push(info);
+    this.state.f3information = info;
   }
 
   render () {
     // Cycles through pages 0-4 only
     // 0: checkout 1: form 1, 2: form 2, 3: form 3, 4: purchase
     var currentPage = this.state.page % 5;
+
+    console.log(this.state);
 
     // Home page with checkout button
     if (currentPage === 0) {
@@ -52,7 +59,7 @@ class App extends React.Component {
     if (currentPage === 1) {
       return (
         <div>
-          <F1 pageChange={this.handleButtonClick}/>
+          <F1 pageChange={this.handleButtonClick} addFormInfo1={this.addFormInfo1}/>
         </div>
       );
     }
@@ -61,7 +68,7 @@ class App extends React.Component {
     if (currentPage === 2) {
       return (
         <div>
-          <F2 pageChange={this.handleButtonClick}/>
+          <F2 pageChange={this.handleButtonClick} addFormInfo2={this.addFormInfo2}/>
         </div>
       );
     }
@@ -70,7 +77,7 @@ class App extends React.Component {
     if (currentPage === 3) {
       return (
         <div>
-          <F3 pageChange={this.handleButtonClick}/>
+          <F3 pageChange={this.handleButtonClick} addFormInfo3={this.addFormInfo3}/>
         </div>
       );
     }
@@ -131,6 +138,7 @@ class F1 extends React.Component {
         <button 
           onClick={(event) => {
             console.log(this.state);
+            this.props.addFormInfo1(this.state);
             this.props.pageChange();
           }
         }>
@@ -196,6 +204,7 @@ class F2 extends React.Component {
         <button 
           onClick={() => {
             console.log(this.state);
+            this.props.addFormInfo2(this.state);
             this.props.pageChange();
           }
         }>
@@ -255,7 +264,9 @@ class F3 extends React.Component {
         </form>
         <button 
           onClick={() => {
-            console.log('test')
+            console.log('test');
+            this.props.addFormInfo3(this.state);
+            this.props.pageChange();
           }
         }>
           Next
@@ -273,4 +284,5 @@ var Purchase = (props) => (
   </div>
 );
 
+// Render to index.html
 ReactDOM.render(<App />, document.getElementById('app'));
