@@ -1,2 +1,7 @@
 node_modules
 *.DS_Store
+challenge_1/package-lock.json
+challenge_1/package.json
+challenge_2/package-lock.json
+challenge_2/package.json
+challenge_2/test.txt
