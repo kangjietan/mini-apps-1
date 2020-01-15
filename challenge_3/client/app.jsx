@@ -86,9 +86,9 @@ class App extends React.Component {
       return (
         <Purchase 
           pageChange={this.handleButtonClick}
-          form1={this.props.f1information}
-          form2={this.props.f2information}
-          form3={this.props.f3information}
+          form1={this.state.f1information}
+          form2={this.state.f2information}
+          form3={this.state.f3information}
         />
       );
     }
@@ -124,7 +124,7 @@ class F1 extends React.Component {
   render() {
     return (
       <div>
-        <h1>Form 1: 1st step</h1>
+        <h1>Form 1: 1st step CREATE AN ACCOUNT</h1>
         <form>
           <div>
             <label>Name: </label>
@@ -141,7 +141,6 @@ class F1 extends React.Component {
         </form>
         <button 
           onClick={(event) => {
-            console.log(this.state);
             this.props.addFormInfo1(this.state);
             this.props.pageChange();
           }
@@ -161,6 +160,7 @@ class F2 extends React.Component {
     this.state = {
       line1: '',
       line2: '',
+      city: '',
       state: '',
       zip: '',
       phone: ''
@@ -193,6 +193,10 @@ class F2 extends React.Component {
             <input type="text" name="line2" value={this.state.line2} onChange={this.handleChange}></input>
           </div>
           <div>
+            <label>City: </label>
+            <input type="text" name="city" value={this.state.city} onChange={this.handleChange}></input>
+          </div>
+          <div>
             <label>State: </label>
             <input type="text" name="state" value={this.state.state} onChange={this.handleChange}></input>
           </div>
@@ -207,7 +211,6 @@ class F2 extends React.Component {
         </form>
         <button 
           onClick={() => {
-            console.log(this.state);
             this.props.addFormInfo2(this.state);
             this.props.pageChange();
           }
@@ -268,7 +271,6 @@ class F3 extends React.Component {
         </form>
         <button 
           onClick={() => {
-            console.log('test');
             this.props.addFormInfo3(this.state);
             this.props.pageChange();
           }
@@ -285,13 +287,20 @@ var Purchase = (props) => (
   <div>
     <h1>Purchase: Final step</h1>
     <div className="form1">
-      {props.form1}
+      <div>Name: {props.form1.name}</div>
+      <div>Email: {props.form1.email}</div>
     </div>
     <div className="form2">
-      {props.form2}
+      <div>Line1: {props.form2.line1}</div>
+      <div>Line2: {props.form2.line2}</div>
+      <div>City: {props.form2.city}</div>
+      <div>State: {props.form2.state}</div>
+      <div>Zip Code: {props.form2.zip}</div>
+      <div>Phone: {props.form2.phone}</div>
     </div>
     <div className="form3">
-      {props.form3}
+      <div>Credit: {props.form3.credit}</div>
+      <div>Billing Zip: {props.form3.billing}</div>
     </div>
     <button onClick={props.pageChange}>Purchase</button>
   </div>
