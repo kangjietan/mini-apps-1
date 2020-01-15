@@ -3,7 +3,6 @@
   // Display all the information currently saved
 // 
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -85,7 +84,12 @@ class App extends React.Component {
     // Purchase page
     if (currentPage === 4) {
       return (
-        <Purchase pageChange={this.handleButtonClick}/>
+        <Purchase 
+          pageChange={this.handleButtonClick}
+          form1={this.props.f1information}
+          form2={this.props.f2information}
+          form3={this.props.f3information}
+        />
       );
     }
 
@@ -280,6 +284,15 @@ class F3 extends React.Component {
 var Purchase = (props) => (
   <div>
     <h1>Purchase: Final step</h1>
+    <div className="form1">
+
+    </div>
+    <div className="form2">
+
+    </div>
+    <div className="form3">
+
+    </div>
     <button onClick={props.pageChange}>Purchase</button>
   </div>
 );
