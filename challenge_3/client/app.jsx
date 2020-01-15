@@ -4,50 +4,80 @@ class App extends React.Component {
 
     this.state = {
       page: 0
-    }
+    };
+
+    this.handleButtonClick = this.handleButtonClick.bind(this);
   }
 
   handleButtonClick() {
-    this.setState({page: page + 1});
+    this.setState({page: this.state.page + 1});
   }
 
   render () {
-    return (
-      <div>
-        <button onClick={this.handleButtonClick}>Checkout</button>
-        <F1 />
-      </div>
-    );
+    var currentPage = this.state.page;
+
+    if (currentPage === 0) {
+      return (
+        <div>
+          <button onClick={this.handleButtonClick}>Checkout</button>
+        </div>
+      );
+    }
+
+    if (currentPage === 1) {
+      return (
+        <div>
+          <F1 pageChange={this.handleButtonClick}/>
+        </div>
+      );
+    }
+    
+    if (currentPage === 2) {
+      return (
+        <div>
+          <F2 pageChange={this.handleButtonClick}/>
+        </div>
+      );
+    }
+
+    if (currentPage === 3) {
+      return (
+        <div>
+          <F3 pageChange={this.handleButtonClick}/>
+        </div>
+      );
+    }
+
   }
 }
 
 // name, email, password for account creation
-var F1 = () => (
+var F1 = (props) => (
   <div>
     <form>
       <input type="text"></input>
     </form>
-    <button>Next</button>
+    <button onClick={props.pageChange}>Next</button>
   </div>
 );
 
 // ship to address (line 1, line 2, state, zip code) and phone number
-var F2 = () => (
+var F2 = (props) => (
   <div>
     <form>
       <input type="text"></input>
     </form>
-    <button>Next</button>
+    <button onClick={props.pageChange}>Next</button>
   </div>
 );
 
 // credit card number, expiracy date, CVV, and billing zip code
-var F3 = () => (
+var F3 = (props) => (
   <div>
     <form>
       <input type="text"></input>
     </form>
-    <button>Next</button>
+    <button onClick={props.pageChange}>Next</button>
   </div>
 );
 
