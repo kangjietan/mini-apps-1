@@ -88,26 +88,6 @@ class App extends React.Component {
 ////////////////////// FORMS and purchase page /////////////////////////
 
 // name, email, password for account creation
-// var F1 = (props) => (
-  // <div>
-  //   <h1>Form 1: 1st step</h1>
-  //   <form>
-  //     <div>
-  //       <label>Name: </label>
-  //       <input type="text" name="name"></input>
-  //     </div>
-  //     <div>
-  //       <label>Email: </label>
-  //       <input type="email" name="email"></input>
-  //     </div>
-  //     <div>
-  //       <label>Password: </label>
-  //       <input type="password" name="password"></input>
-  //     </div>
-  //   </form>
-  //   <button onClick={(event)=>{console.log(event)}}>Next</button>
-  // </div>
-// );
 class F1 extends React.Component {
   constructor(props) {
     super(props);
@@ -148,42 +128,80 @@ class F1 extends React.Component {
             <input type="password" name="password" value={this.state.password} onChange={this.handleChange}></input>
           </div>
         </form>
-        <button onClick={(event)=>{console.log(this.state)}}>Next</button>
+        <button onClick={(event)=>{
+              console.log(this.state);
+              this.props.pageChange();
+            }
+          }>
+          Next
+        </button>
       </div>
     );
   }
 }
 
 // ship to address (line 1, line 2, state, zip code) and phone number
-var F2 = (props) => (
-  <div>
-    <h1>Form 2: 2nd step</h1>
-    <form>
-      <h2>Address</h2>
+class F2 extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      line1: '',
+      line2: '',
+      state: '',
+      zip: '',
+      phone: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  render() {
+    return (
       <div>
-        <label>Line 1: </label>
-        <input type="text" name="line1"></input>
+        <h1>Form 2: 2nd step</h1>
+        <form>
+          <h2>Address</h2>
+          <div>
+            <label>Line 1: </label>
+            <input type="text" name="line1" value={this.state.line1} onChange={this.handleChange}></input>
+          </div>
+          <div>
+            <label>Line 2: </label>
+            <input type="text" name="line2" value={this.state.line2} onChange={this.handleChange}></input>
+          </div>
+          <div>
+            <label>State: </label>
+            <input type="text" name="state" value={this.state.state} onChange={this.handleChange}></input>
+          </div>
+          <div>
+            <label>Zip Code: </label>
+            <input type="text" name="zip" value={this.state.zip} onChange={this.handleChange}></input>
+          </div>
+          <div>
+            <label>Phone Number: </label>
+            <input type="tel" name="phone" value={this.state.phone} onChange={this.handleChange}></input>
+          </div>
+        </form>
+        <button onClick={() => {
+            console.log('hello');
+            }
+          }>
+          Next
+        </button>
       </div>
-      <div>
-        <label>Line 2: </label>
-        <input type="text" name="line2"></input>
-      </div>
-      <div>
-        <label>State: </label>
-        <input type="text" name="state"></input>
-      </div>
-      <div>
-        <label>Zip Code: </label>
-        <input type="text" name="zip"></input>
-      </div>
-      <div>
-        <label>Phone Number: </label>
-        <input type="tel" name="phone"></input>
-      </div>
-    </form>
-    <button onClick={props.pageChange}>Next</button>
-  </div>
-);
+    )
+  }
+}
 
 // credit card number, expiracy date, CVV, and billing zip code
 var F3 = (props) => (
@@ -207,7 +225,7 @@ var F3 = (props) => (
         <input type="text" name="billing"></input>
       </div>
     </form>
-    <button onClick={props.pageChange}>Next</button>
+    <button onClick={()=>{console.log('test')}}>Next</button>
   </div>
 );
 
