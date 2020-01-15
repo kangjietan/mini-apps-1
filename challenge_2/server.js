@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const fs = require('fs');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -48,17 +49,27 @@ app.post('/submit', (req, res, next) => {
     for (var j = 0; j < innerArray.length; j++) {
       row += innerArray[j];
       if (j === innerArray.length - 1) {
-        row += '/n';
+        row += '\n';
       }
     }
 
     strings.push(row);
   }
 
-  console.log(strings);
+  const flattened = arr => { return [].concat(...arr) };
+  var flatString = flattened(strings);
+  // console.log(...strings);
+  // for (var i = 0; i < strings.length; i++) {
+  fs.writeFileSync('test.txt', flatString, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Writing!');
+    }
+  })
+  // }
 
-  
-  res.end();
+  // res.end();
   // res.download('./samples/csv_report.csv', 'csv_report.csv', (err) => {
   //   if (err) {
   //     console.log(err);
