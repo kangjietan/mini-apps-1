@@ -99,14 +99,14 @@ app.post('/submit', (req, res, next) => {
         root: path.join(__dirname)
       } 
 
-    res.sendFile('test.txt', options, (err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log('success');
-      }
-    })
-  });
+      res.sendFile('test.txt', options, (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('success');
+        }
+      })
+    });
   // res.download('./samples/csv_report.csv', 'csv_report.csv', (err) => {
   //   if (err) {
   //     console.log(err);
