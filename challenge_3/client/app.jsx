@@ -251,19 +251,19 @@ class F3 extends React.Component {
         <form>
           <div>
             <label>Credit Card: </label>
-            <input type="text" name="credit"></input>
+            <input type="text" name="credit" value={this.state.credit} onChange={this.handleChange}></input>
           </div>
           <div>
             <label>Expiracy date: </label>
-            <input type="date" name="date"></input>
+            <input type="date" name="date" value={this.state.date} onChange={this.handleChange}></input>
           </div>
           <div>
             <label>CVV: </label>
-            <input type="text" name="cvv"></input>
+            <input type="text" name="cvv" value={this.state.cvv} onChange={this.handleChange}></input>
           </div>
           <div>
             <label>Billing Zip Code: </label>
-            <input type="text" name="billing"></input>
+            <input type="text" name="billing" value={this.state.billing} onChange={this.handleChange}></input>
           </div>
         </form>
         <button 
@@ -285,13 +285,13 @@ var Purchase = (props) => (
   <div>
     <h1>Purchase: Final step</h1>
     <div className="form1">
-
+      {props.form1}
     </div>
     <div className="form2">
-
+      {props.form2}
     </div>
     <div className="form3">
-
+      {props.form3}
     </div>
     <button onClick={props.pageChange}>Purchase</button>
   </div>
