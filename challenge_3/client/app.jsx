@@ -128,11 +128,12 @@ class F1 extends React.Component {
             <input type="password" name="password" value={this.state.password} onChange={this.handleChange}></input>
           </div>
         </form>
-        <button onClick={(event)=>{
-              console.log(this.state);
-              this.props.pageChange();
-            }
-          }>
+        <button 
+          onClick={(event) => {
+            console.log(this.state);
+            this.props.pageChange();
+          }
+        }>
           Next
         </button>
       </div>
@@ -192,42 +193,77 @@ class F2 extends React.Component {
             <input type="tel" name="phone" value={this.state.phone} onChange={this.handleChange}></input>
           </div>
         </form>
-        <button onClick={() => {
-            console.log('hello');
-            }
-          }>
+        <button 
+          onClick={() => {
+            console.log(this.state);
+            this.props.pageChange();
+          }
+        }>
           Next
         </button>
       </div>
-    )
+    );
   }
 }
 
 // credit card number, expiracy date, CVV, and billing zip code
-var F3 = (props) => (
-  <div>
-    <h1>Form 3: 3rd step</h1>
-    <form>
+class F3 extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      credit: '',
+      date: '',
+      cvv: '',
+      billing: ''
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  render() {
+    return (
       <div>
-        <label>Credit Card: </label>
-        <input type="text" name="credit"></input>
+        <h1>Form 3: 3rd step</h1>
+        <form>
+          <div>
+            <label>Credit Card: </label>
+            <input type="text" name="credit"></input>
+          </div>
+          <div>
+            <label>Expiracy date: </label>
+            <input type="date" name="date"></input>
+          </div>
+          <div>
+            <label>CVV: </label>
+            <input type="text" name="cvv"></input>
+          </div>
+          <div>
+            <label>Billing Zip Code: </label>
+            <input type="text" name="billing"></input>
+          </div>
+        </form>
+        <button 
+          onClick={() => {
+            console.log('test')
+          }
+        }>
+          Next
+        </button>
       </div>
-      <div>
-        <label>Expiracy date: </label>
-        <input type="date" name="date"></input>
-      </div>
-      <div>
-        <label>CVV: </label>
-        <input type="text" name="cvv"></input>
-      </div>
-      <div>
-        <label>Billing Zip Code: </label>
-        <input type="text" name="billing"></input>
-      </div>
-    </form>
-    <button onClick={()=>{console.log('test')}}>Next</button>
-  </div>
-);
+    );
+  }
+}
 
 // Last page summarizing all the data
 var Purchase = (props) => (
