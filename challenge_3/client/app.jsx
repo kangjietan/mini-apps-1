@@ -158,14 +158,16 @@ class F1 extends React.Component {
           <div>
             <label>Email: </label>
             <input 
-              type="email" name="email" 
+              type="email" name="email" minLength="3"
               value={this.state.email} 
               onChange={this.handleChange}>
             </input>
           </div>
           <div>
             <label>Password: </label>
-            <input type="password" name="password" value={this.state.password} onChange={this.handleChange}></input>
+            <input type="password" name="password" minLength="8"
+            value={this.state.password} 
+            onChange={this.handleChange}></input>
           </div>
         </form>
         <button type="submit" form="form1">Next</button>
@@ -204,7 +206,17 @@ class F2 extends React.Component {
     return (
       <div>
         <h1>Form 2: 2nd step</h1>
-        <form>
+        <form id="form2" onSubmit={(e) => {
+          e.preventDefault();
+          var a = this.state.line1;
+          var b = this.state.line2;
+          var c = this.state.city;
+          var d = this.state.state;
+          var e = this.state.zip;
+          var a = this.state.phone;
+          this.props.addFormInfo2(this.state);
+          this.props.pageChange();
+        }}>
           <h2>Address</h2>
           <div>
             <label>Line 1: </label>
@@ -231,20 +243,7 @@ class F2 extends React.Component {
             <input type="tel" name="phone" value={this.state.phone} onChange={this.handleChange}></input>
           </div>
         </form>
-        <button 
-          onClick={() => {
-            var a = this.state.line1;
-            var b = this.state.line2;
-            var c = this.state.city;
-            var d = this.state.state;
-            var e = this.state.zip;
-            var a = this.state.phone;
-            this.props.addFormInfo2(this.state);
-            this.props.pageChange();
-          }
-        }>
-          Next
-        </button>
+        <button type="submit" form="form2">Next</button>
       </div>
     );
   }
@@ -279,7 +278,11 @@ class F3 extends React.Component {
     return (
       <div>
         <h1>Form 3: 3rd step</h1>
-        <form>
+        <form id="form3" onSubmit={(e) => {
+          e.preventDefault();
+          this.props.addFormInfo3(this.state);
+          this.props.pageChange();
+        }}>
           <div>
             <label>Credit Card: </label>
             <input type="text" name="credit" value={this.state.credit} onChange={this.handleChange}></input>
@@ -297,14 +300,7 @@ class F3 extends React.Component {
             <input type="text" name="billing" value={this.state.billing} onChange={this.handleChange}></input>
           </div>
         </form>
-        <button 
-          onClick={() => {
-            this.props.addFormInfo3(this.state);
-            this.props.pageChange();
-          }
-        }>
-          Next
-        </button>
+        <button type="submit" form="form3">Next</button>
       </div>
     );
   }
