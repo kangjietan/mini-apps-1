@@ -32,12 +32,14 @@ app.post('/purchase', (req, res) => {
   db.query(queryStr, params, (err, results) => {
     if (err) {
       console.log(err);
+      res.sendStatus(400);
     } else {
       console.log(results);
+      res.sendStatus(200);
     }
-    res.end();
   })
 });
+
 
 // name
 // email

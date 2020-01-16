@@ -56,8 +56,6 @@ class App extends React.Component {
     // 0: checkout 1: form 1, 2: form 2, 3: form 3, 4: purchase
     var currentPage = this.state.page % 5;
 
-    console.log(this.state);
-
     // Home page with checkout button
     if (currentPage === 0) {
       return (

@@ -3,6 +3,7 @@ CREATE DATABASE checkout;
 USE checkout;
 
 CREATE TABLE records (
+  id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100),
   email VARCHAR(100),
   password VARCHAR(100),
@@ -17,6 +18,7 @@ CREATE TABLE records (
 );
 
 -- CREATE TABLE user (
+--   id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 --   name VARCHAR(100),
 --   email VARCHAR(100),
 --   password VARCHAR(100)
