@@ -139,18 +139,13 @@ class F1 extends React.Component {
         <h1>Form 1: 1st step CREATE AN ACCOUNT</h1>
         <form id="form1" onSubmit={(e) => {
           e.preventDefault();
-          var val = this.state;
-          if (val.name === '' || val.email === '' || val.password === '') {
-            alert('Make sure all inputs are filled in!');
-            return;
-          }
           this.props.addFormInfo1(this.state);
           this.props.pageChange();
         }}>
           <div>
             <label>Name: </label>
             <input 
-              type="text" name="name" minLength="2"
+              type="text" name="name" minLength="2" required="required"
               value={this.state.name} 
               onChange={this.handleChange}>
             </input>
@@ -158,14 +153,14 @@ class F1 extends React.Component {
           <div>
             <label>Email: </label>
             <input 
-              type="email" name="email" minLength="3"
+              type="email" name="email" minLength="3" required="required"
               value={this.state.email} 
               onChange={this.handleChange}>
             </input>
           </div>
           <div>
             <label>Password: </label>
-            <input type="password" name="password" minLength="8"
+            <input type="password" name="password" minLength="8" required="required"
             value={this.state.password} 
             onChange={this.handleChange}></input>
           </div>
@@ -208,39 +203,45 @@ class F2 extends React.Component {
         <h1>Form 2: 2nd step</h1>
         <form id="form2" onSubmit={(e) => {
           e.preventDefault();
-          var a = this.state.line1;
-          var b = this.state.line2;
-          var c = this.state.city;
-          var d = this.state.state;
-          var e = this.state.zip;
-          var a = this.state.phone;
           this.props.addFormInfo2(this.state);
           this.props.pageChange();
         }}>
           <h2>Address</h2>
           <div>
             <label>Line 1: </label>
-            <input type="text" name="line1" value={this.state.line1} onChange={this.handleChange}></input>
+            <input type="text" name="line1" required="required"
+            value={this.state.line1
+            } onChange={this.handleChange}></input>
           </div>
           <div>
             <label>Line 2: </label>
-            <input type="text" name="line2" value={this.state.line2} onChange={this.handleChange}></input>
+            <input type="text" name="line2"
+            value={this.state.line2
+            } onChange={this.handleChange}></input>
           </div>
           <div>
             <label>City: </label>
-            <input type="text" name="city" value={this.state.city} onChange={this.handleChange}></input>
+            <input type="text" name="city" required="required"
+            value={this.state.city}
+             onChange={this.handleChange}></input>
           </div>
           <div>
             <label>State: </label>
-            <input type="text" name="state" value={this.state.state} onChange={this.handleChange}></input>
+            <input type="text" name="state" required="required"
+            value={this.state.state
+            } onChange={this.handleChange}></input>
           </div>
           <div>
             <label>Zip Code: </label>
-            <input type="text" name="zip" value={this.state.zip} onChange={this.handleChange}></input>
+            <input type="text" name="zip" required="required"
+            value={this.state.zip} 
+            onChange={this.handleChange}></input>
           </div>
           <div>
             <label>Phone Number: </label>
-            <input type="tel" name="phone" value={this.state.phone} onChange={this.handleChange}></input>
+            <input type="tel" name="phone" required="required"
+            value={this.state.phone
+            } onChange={this.handleChange}></input>
           </div>
         </form>
         <button type="submit" form="form2">Next</button>
@@ -285,19 +286,27 @@ class F3 extends React.Component {
         }}>
           <div>
             <label>Credit Card: </label>
-            <input type="text" name="credit" value={this.state.credit} onChange={this.handleChange}></input>
+            <input type="text" name="credit" required="required"
+            value={this.state.credit} 
+            onChange={this.handleChange}></input>
           </div>
           <div>
             <label>Expiracy date: </label>
-            <input type="date" name="date" value={this.state.date} onChange={this.handleChange}></input>
+            <input type="date" name="date" required="required"
+            value={this.state.date} 
+            onChange={this.handleChange}></input>
           </div>
           <div>
             <label>CVV: </label>
-            <input type="text" name="cvv" value={this.state.cvv} onChange={this.handleChange}></input>
+            <input type="text" name="cvv" required="required"
+            value={this.state.cvv} 
+            onChange={this.handleChange}></input>
           </div>
           <div>
             <label>Billing Zip Code: </label>
-            <input type="text" name="billing" value={this.state.billing} onChange={this.handleChange}></input>
+            <input type="text" name="billing" required="required"
+            value={this.state.billing} 
+            onChange={this.handleChange}></input>
           </div>
         </form>
         <button type="submit" form="form3">Next</button>
