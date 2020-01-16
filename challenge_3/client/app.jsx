@@ -3,6 +3,8 @@
   // Display all the information currently saved
 // 
 
+// const axios = require('axios');
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -18,6 +20,7 @@ class App extends React.Component {
     this.addFormInfo1 = this.addFormInfo1.bind(this);
     this.addFormInfo2 = this.addFormInfo2.bind(this);
     this.addFormInfo3 = this.addFormInfo3.bind(this);
+    this.sendInfoToDB = this.sendInfoToDB.bind(this);
   }
 
   // Cycle through pages after each click
@@ -36,6 +39,16 @@ class App extends React.Component {
 
   addFormInfo3(info) {
     this.state.f3information = info;
+  }
+
+  sendInfoToDB(data) {
+    axios.post('http://localhost:3000/purchase', data)
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   render () {
@@ -89,6 +102,7 @@ class App extends React.Component {
           form1={this.state.f1information}
           form2={this.state.f2information}
           form3={this.state.f3information}
+          post={this.sendInfoToDB}
         />
       );
     }
@@ -302,7 +316,16 @@ var Purchase = (props) => (
       <div>Credit: {props.form3.credit}</div>
       <div>Billing Zip: {props.form3.billing}</div>
     </div>
-    <button onClick={props.pageChange}>Purchase</button>
+    <button 
+      onClick={() => {
+        props.pageChange();
+        // Object.assign overwrites. Using it to extend
+        var userInfo = Object.assign(props.form1, props.form2, props.form3);
+        props.post(userInfo);
+      }
+    }>
+      Purchase
+    </button>
   </div>
 );
 
