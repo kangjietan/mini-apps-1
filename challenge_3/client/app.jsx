@@ -137,28 +137,38 @@ class F1 extends React.Component {
     return (
       <div>
         <h1>Form 1: 1st step CREATE AN ACCOUNT</h1>
-        <form>
+        <form id="form1" onSubmit={(e) => {
+          e.preventDefault();
+          var val = this.state;
+          if (val.name === '' || val.email === '' || val.password === '') {
+            alert('Make sure all inputs are filled in!');
+            return;
+          }
+          this.props.addFormInfo1(this.state);
+          this.props.pageChange();
+        }}>
           <div>
             <label>Name: </label>
-            <input type="text" name="name" value={this.state.name} onChange={this.handleChange}></input>
+            <input 
+              type="text" name="name" minLength="2"
+              value={this.state.name} 
+              onChange={this.handleChange}>
+            </input>
           </div>
           <div>
             <label>Email: </label>
-            <input type="email" name="email" value={this.state.email} onChange={this.handleChange}></input>
+            <input 
+              type="email" name="email" 
+              value={this.state.email} 
+              onChange={this.handleChange}>
+            </input>
           </div>
           <div>
             <label>Password: </label>
             <input type="password" name="password" value={this.state.password} onChange={this.handleChange}></input>
           </div>
         </form>
-        <button 
-          onClick={(event) => {
-            this.props.addFormInfo1(this.state);
-            this.props.pageChange();
-          }
-        }>
-          Next
-        </button>
+        <button type="submit" form="form1">Next</button>
       </div>
     );
   }
@@ -223,6 +233,12 @@ class F2 extends React.Component {
         </form>
         <button 
           onClick={() => {
+            var a = this.state.line1;
+            var b = this.state.line2;
+            var c = this.state.city;
+            var d = this.state.state;
+            var e = this.state.zip;
+            var a = this.state.phone;
             this.props.addFormInfo2(this.state);
             this.props.pageChange();
           }
