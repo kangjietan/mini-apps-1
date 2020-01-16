@@ -26,8 +26,9 @@ app.post('/purchase', (req, res) => {
   ];
 
   var queryStr = 'insert into records \
-    (name, email, password, line1, line2, city, state, zip, credit, date, billing) \
-    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+                  (name, email, password, line1, line2, \
+                  city, state, zip, credit, date, billing) \
+                  values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
   db.query(queryStr, params, (err, results) => {
     if (err) {
