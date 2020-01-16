@@ -3,7 +3,7 @@ CREATE DATABASE checkout;
 USE checkout;
 
 CREATE TABLE records (
-  usersname VARCHAR(100),
+  name VARCHAR(100),
   email VARCHAR(100),
   password VARCHAR(100),
   line1 VARCHAR(100),
