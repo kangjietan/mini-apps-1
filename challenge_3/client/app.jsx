@@ -1,9 +1,7 @@
 // Keep track of all the form information in the app state
 // Once the purchase page has been reached
   // Display all the information currently saved
-// 
-
-// const axios = require('axios');
+// Sent all information to db to store
 
 class App extends React.Component {
   constructor(props) {
@@ -17,6 +15,7 @@ class App extends React.Component {
     };
 
     this.handleButtonClick = this.handleButtonClick.bind(this);
+    this.handleBackClick = this.handleBackClick.bind(this);
     this.addFormInfo1 = this.addFormInfo1.bind(this);
     this.addFormInfo2 = this.addFormInfo2.bind(this);
     this.addFormInfo3 = this.addFormInfo3.bind(this);
@@ -25,7 +24,16 @@ class App extends React.Component {
 
   // Cycle through pages after each click
   handleButtonClick() {
-    this.setState({page: this.state.page + 1});
+    this.setState({
+      page: this.state.page + 1
+    });
+  }
+
+  // Go back one page
+  handleBackClick() {
+    this.setState({
+      page: this.state.page - 1
+    });
   }
 
   // Add object of information
@@ -41,7 +49,9 @@ class App extends React.Component {
     this.state.f3information = info;
   }
 
+  // Send post request to db to store info
   sendInfoToDB(data) {
+    // axios from script tag in index.html
     axios.post('http://localhost:3000/purchase', data)
     .then(res => {
       console.log(res);
@@ -69,7 +79,11 @@ class App extends React.Component {
     if (currentPage === 1) {
       return (
         <div>
-          <F1 pageChange={this.handleButtonClick} addFormInfo1={this.addFormInfo1}/>
+          <F1 
+          pageChange={this.handleButtonClick} 
+          addFormInfo1={this.addFormInfo1}
+          backwards={this.handleBackClick}
+          />
         </div>
       );
     }
@@ -78,7 +92,11 @@ class App extends React.Component {
     if (currentPage === 2) {
       return (
         <div>
-          <F2 pageChange={this.handleButtonClick} addFormInfo2={this.addFormInfo2}/>
+          <F2 
+          pageChange={this.handleButtonClick} 
+          addFormInfo2={this.addFormInfo2}
+          backwards={this.handleBackClick}
+          />
         </div>
       );
     }
@@ -87,7 +105,11 @@ class App extends React.Component {
     if (currentPage === 3) {
       return (
         <div>
-          <F3 pageChange={this.handleButtonClick} addFormInfo3={this.addFormInfo3}/>
+          <F3 
+          pageChange={this.handleButtonClick} 
+          addFormInfo3={this.addFormInfo3}
+          backwards={this.handleBackClick}
+          />
         </div>
       );
     }
@@ -101,6 +123,7 @@ class App extends React.Component {
           form2={this.state.f2information}
           form3={this.state.f3information}
           post={this.sendInfoToDB}
+          backwards={this.handleBackClick}
         />
       );
     }
@@ -137,6 +160,7 @@ class F1 extends React.Component {
     return (
       <div>
         <h1>Form 1: 1st step CREATE AN ACCOUNT</h1>
+        <button onClick={this.props.backwards}>Back</button>
         <form id="form1" onSubmit={(e) => {
           e.preventDefault();
           this.props.addFormInfo1(this.state);
@@ -201,6 +225,7 @@ class F2 extends React.Component {
     return (
       <div>
         <h1>Form 2: 2nd step</h1>
+        <button onClick={this.props.backwards}>Back</button>
         <form id="form2" onSubmit={(e) => {
           e.preventDefault();
           this.props.addFormInfo2(this.state);
@@ -279,6 +304,7 @@ class F3 extends React.Component {
     return (
       <div>
         <h1>Form 3: 3rd step</h1>
+        <button onClick={this.props.backwards}>Back</button>
         <form id="form3" onSubmit={(e) => {
           e.preventDefault();
           this.props.addFormInfo3(this.state);
@@ -319,6 +345,7 @@ class F3 extends React.Component {
 var Purchase = (props) => (
   <div>
     <h1>Purchase: Final step</h1>
+    <button onClick={props.backwards}>Back</button>
     <div className="form1">
       <div>Name: {props.form1.name}</div>
       <div>Email: {props.form1.email}</div>
